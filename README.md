@@ -1,2 +1,2 @@
-# fega-elixir-it.github.io
-FEGA Elixir Italy
+# fega-elixir-it
+FEGA Elixir-it node
