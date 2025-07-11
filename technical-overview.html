@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical Overview – FEGA Italy</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>FEGA Italy</h1>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./submit-data.html">Submit data</a></li>
+        <li><a href="./search-data.html">Search data</a></li>
+        <li><a href="./access-data.html">Access data</a></li>
+        <li><a href="./approve-access.html">Approve access</a></li>
+        <li><a href="./node-status.html">Node status</a></li>
+        <li><a href="./technical-overview.html">Technical Overview</a></li>
+        <li><a href="./fega-team.html">Team</a></li>
+      </ul>
+    </nav>
+    <div class="header-logos">
+      <img src="./imgs/elixir_logo.png" alt="Elixir Italia Logo" />
+      <img src="./imgs/fega2.png" alt="FEGA Logo" />
+    </div>
+  </header>
+
+  <main id="top">
+    <h2>Technical Overview</h2>
+    <p>How does FEGA work? Here you can find a technical overview of its many components.</p>
+
+    <ul>
+      <li><a href="#legal">Legal and Ethical Compliance</a></li>
+      <li><a href="#register">Register</a></li>
+      <li><a href="#submitting">Submitting Data</a>
+        <ul>
+          <li><a href="#data-submission">Data Submission</a></li>
+          <li><a href="#metadata-submission">Metadata Submission</a></li>
+          <li><a href="#encryption">Encryption & Backup</a></li>
+        </ul>
+      </li>
+      <li><a href="#access">Accessing Data</a>
+        <ul>
+          <li><a href="#sftp">SSH File Transfer Protocol</a></li>
+          <li><a href="#quickview">EGA-QuickView</a></li>
+        </ul>
+      </li>
+      <li><a href="#create-node">Can I Create a Node?</a>
+        <ul>
+          <li><a href="#advantages">Advantages</a></li>
+          <li><a href="#responsibilities">Responsibilities</a></li>
+          <li><a href="#requirements">Hardware Requirements</a></li>
+          <li><a href="#costs">Costs</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <section id="legal">
+      <h3>Legal and Ethical Compliance</h3>
+      <p>Start by contacting your institution’s Data Protection Officer (DPO) to ensure that the proposed use of human genomic data complies with GDPR and national legislation. Prepare all necessary documents demonstrating ethical approval by your institution's ethics committee. Finally, a Data Processing Agreement (DPA) must be signed between your institution and the FEGA Italy node before data submission can proceed.</p>
+      <p><a href="#top">Back to Top</a></p>
+    </section>
+
+    <section id="register">
+      <h3>Register</h3>
+      <p>To use the Italian Local EGA (LEGA) node, researchers must first obtain an EGA account through the European Genome-phenome Archive helpdesk. Then, they must register their SSH public key (RSA or ED25519) in the CEGA portal, which will be used to securely transfer files to and from the LEGA system.</p>
+      <p><a href="#top">Back to Top</a></p>
+    </section>
+
+    <section id="submitting">
+      <h3>Submitting Data</h3>
+      <section id="data-submission">
+        <h4>Data Submission</h4>
+        <p>Before submission, data must be encrypted using the LEGA public key in Crypt4GH format:</p>
+        <pre><code>ssh-ed25519 AAAAC3Nza... Service.Key@LocalEGA</code></pre>
+        <pre><code>crypt4gh encrypt --recipient_pk $lega_pubkey_file < $filename > $filename.c4gh</code></pre>
+        <p>Once encrypted, data can be uploaded to the LEGA inbox via SFTP:</p>
+        <pre><code>sftp -o User=$username -P 2222 -i $privkey_file $lega_ip</code></pre>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+
+      <section id="metadata-submission">
+        <h4>Metadata Submission</h4>
+        <p>Once data ingestion has completed successfully, metadata can be submitted via the national submission portal. The metadata must accurately reflect the content of the dataset and be approved by the national EGA helpdesk. Once validated, the data will become discoverable through the EGA catalog.</p>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+
+      <section id="encryption">
+        <h4>Encryption & Backup</h4>
+        <p>After staging, the Crypt4GH header is re-encrypted and stored separately in the archive database. The data payload is stored in the vault and backed up using a secure S3-compatible storage system. To prevent data breaches, headers and payloads are stored in distinct locations, requiring compromise of both to access the complete dataset.</p>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+    </section>
+
+    <section id="access">
+      <h3>Accessing Data</h3>
+      <section id="sftp">
+        <h4>SSH File Transfer Protocol</h4>
+        <p>Data can be accessed via SFTP using your registered private key and EGA credentials. Downloaded data must then be decrypted locally using Crypt4GH. This method is best suited for complete file retrieval, and may be inefficient for large datasets or partial access needs.</p>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+
+      <section id="quickview">
+        <h4>EGA-QuickView</h4>
+        <p>For efficient access to specific regions within large datasets, EGA-QuickView can be used. It mounts a local FUSE filesystem and allows streaming of decrypted data blocks using partial header re-encryption. This enables fast and secure data preview and minimizes resource consumption.</p>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+    </section>
+
+    <section id="create-node">
+      <h3>Can I Create a Node?</h3>
+      <p>Yes, institutions in Italy can deploy their own LEGA node. This allows data to be stored locally while publishing only non-sensitive metadata to the central EGA catalog.</p>
+
+      <section id="advantages">
+        <h4>Advantages</h4>
+        <p>Institutions with stringent data policies may prefer local storage. A national node provides full control over sensitive data while still participating in the European EGA network.</p>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+
+      <section id="responsibilities">
+        <h4>Responsibilities</h4>
+        <p>The hosting institution is responsible for providing and maintaining the required infrastructure, as well as ensuring compliance with FEGA technical and ethical guidelines. Installation support is available for ELIXIR Italy members.</p>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+
+      <section id="requirements">
+        <h4>Hardware Requirements</h4>
+        <p>A minimal installation requires a VM with 4 CPUs, 8GB RAM, and 40GB disk space. Additional storage must be provisioned for the vault and backup volumes, sized according to expected data volumes.</p>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+
+      <section id="costs">
+        <h4>Costs</h4>
+        <p>There is no cost for ELIXIR Italy members. Non-member institutions may receive a custom quote based on infrastructure and support requirements.</p>
+        <p><a href="#top">Back to Top</a></p>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 FEGA Italy – All rights reserved</p>
+  </footer>
+</body>
+</html>
+

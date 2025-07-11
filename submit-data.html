@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Submit Data – FEGA Italy</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>FEGA Italy</h1>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./submit-data.html">Submit data</a></li>
+        <li><a href="./search-data.html">Search data</a></li>
+        <li><a href="./access-data.html">Access data</a></li>
+        <li><a href="./approve-access.html">Approve access</a></li>
+        <li><a href="https://status.test.ega-archive.org/status/fega-italy">Node status</a></li>
+        <li><a href="./technical-overview.html">Technical Overview</a></li>
+        <li><a href="./fega-team.html">Team</a></li>
+      </ul>
+    </nav>
+    <div class="header-logos">
+      <img src="./imgs/elixir_logo.png" alt="Elixir Italia Logo" />
+      <img src="./imgs/fega2.png" alt="FEGA Logo" />
+    </div>
+  </header>
+
+  <main>
+    <h2>Submit Data – Step by Step Guide</h2>
+
+    <p>To submit new data to the FEGA Italy, please make sure to follow the steps below. More technical details are available on the overview page.</p>
+
+    <ol>
+      <li>Pre-submission</li>
+      <li>Step 1 – Register</li>
+      <li>Step 2 – Data Submission</li>
+      <li>Step 3 – Metadata Submission</li>
+    </ol>
+
+    <h3>Pre-submission</h3>
+    <p>Prior to submitting, you will need to contact your institution’s Data Protection Officer (DPO) to ensure you have your ethical committee approval documents ready for submission. We require completing the Data Processing Agreement (DPA) with the FEGA Italy node.</p>
+
+    <h3>Step 1 – Register</h3>
+    <ul>
+      <li>Register in the Central EGA Website.</li>
+      <li>Create an RSA or ED25519 key pair using the command:</li>
+    </ul>
+
+    <pre><code>ssh-keygen -t ed25519 -C my_fega_key -f ./my_fega_key</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>The generator will ask for a passphrase. Choose a secure one. You will obtain two files:</p>
+    <ul>
+      <li><code>my_fega_key</code> – your private key (keep it secure)</li>
+      <li><code>my_fega_key.pub</code> – your public key (register this)</li>
+    </ul>
+    <p>Insert your public key in your user profile in the EGA Website (link soon).</p>
+
+    <h3>Step 2 – Data Submission</h3>
+    <p>To create the LEGA Node’s public key file:</p>
+
+    <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQJY9fFb6Bft7frHDeCLlQrh102adymVXgc9hlWPYN3 Service.Key@LocalEGA</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>Encrypt the file(s) using:</p>
+
+    <pre><code>crypt4gh encrypt --recipient_pk $lega_pubkey_file &lt; $filename &gt; $filename.c4gh</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>Connect to the LEGA SFTP inbox using:</p>
+
+    <pre><code>sftp -o User=$username -P 2222 -i $privkey_file $lega_ip</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>Upload the encrypted file:</p>
+
+    <pre><code>sftp&gt; put GCF_009914755.1_T2T-CHM13v2.0_genomic.fna.c4gh</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>Example output:</p>
+
+    <pre><code>Connected to 146.193.228.54.
+sftp&gt; put GCF_009914755.1_T2T-CHM13v2.0_genomic.fna.c4gh
+Uploading... 100% 3011MB   5.5MB/s   09:06</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>You can delete unprocessed files using <code>rm &lt;filename&gt;</code>. Files already in staging/vault cannot be removed.</p>
+
+    <h3>Step 3 – Metadata Submission</h3>
+    <ul>
+	  <li>
+		Access the submission website and complete metadata entry for ingested files.
+		<br/>
+		<img src="./imgs/metadata_link_data_file.png" style="max-width: 100%; height: auto; margin-top:8px;"/>
+	  </li>
+	  <br>
+	  <li>
+		If uploaded files do not appear, ingestion may have failed. Contact the Helpdesk.
+		<br/>
+		<img src="./imgs/metadata_link_run_to_dataset.png" style="max-width: 100%; height: auto; margin-top:8px;"/>
+	  </li>
+	</ul>
+    <p>Once accepted, the file is moved to the vault and becomes findable on the EGA website.</p>
+
+    <p><strong>Example:</strong></p>
+    <ol>
+      <li>Add a new Run by searching for the file</li>
+      <li>Fill the metadata to add the new Dataset</li>
+    </ol>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 FEGA Italy – All rights reserved</p>
+  </footer>
+
+  <script>
+    function copyCode(button) {
+      const pre = button.parentElement;
+      const code = pre.querySelector('code');
+      const text = code.innerText || code.textContent;
+
+      if (!navigator.clipboard) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          button.innerText = 'Copied!';
+        } catch (err) {
+          alert('Copy failed');
+        }
+        document.body.removeChild(textarea);
+        setTimeout(() => button.innerText = 'Copy', 1500);
+        return;
+      }
+
+      navigator.clipboard.writeText(text).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => button.innerText = 'Copy', 1500);
+      }).catch(() => {
+        alert('Failed to copy');
+      });
+    }
+  </script>
+</body>
+</html>
+
