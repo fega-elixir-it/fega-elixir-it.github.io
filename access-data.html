@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Access Data – FEGA Italy</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>FEGA Italy</h1>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./submit-data.html">Submit data</a></li>
+        <li><a href="./search-data.html">Search data</a></li>
+        <li><a href="./access-data.html">Access data</a></li>
+        <li><a href="./approve-access.html">Approve access</a></li>
+        <li><a href="https://status.test.ega-archive.org/status/fega-italy">Node status</a></li>
+        <li><a href="./technical-overview.html">Technical Overview</a></li>
+        <li><a href="./fega-team.html">Team</a></li>
+      </ul>
+    </nav>
+    <div class="header-logos">
+      <img src="./imgs/elixir_logo.png" alt="Elixir Italia Logo" />
+      <img src="./imgs/fega2.png" alt="FEGA Logo" />
+    </div>
+  </header>
+
+  <main>
+    <h2>Access Data – Step by Step Guide</h2>
+
+    <p>Bellow are the two available methods for accessing data from FEGA Italy. More technical details are available on the overview page.</p>
+
+    <ol>
+      <li>Method 1: SSH File Transfer Protocol</li>
+      <li>Method 2: EGA-QuickView</li>
+    </ol>
+
+    <h3>Method 1: SSH File Transfer Protocol</h3>
+    <p>The most immediate way to download files from a LEGA node is by accessing its distribution endpoint using SFTP:</p>
+    <pre><code>sftp -o User=$username -P 2222 -i $privkey_file $lega_ip</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>Download it using:</p>
+    <pre><code>get &lt;filename&gt;</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>And then decrypt the entire C4GH file using Crypt4GH, with the following command:</p>
+    <pre><code>crypt4gh decrypt --sk $privkey_file &lt; $filename.c4gh &gt; $filename</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>This will download the entire file and decrypt it as a whole when the download concludes.</p>
+
+    <h4>Console Example – Retrieving data using SSH FTP</h4>
+
+    <h3>Method 2: EGA-QuickView</h3>
+    <p>To avoid downloading the complete file, EGA-QuickView was developed. This tool takes advantage of Crypt4GH using block encryption and the fact that the LEGA distribution allows for requests for certain bytes of a file without downloading all the previous ones.</p>
+
+    <p>To do that, a user chooses a local empty directory to work as a mount point where files in the outbox will appear decrypted while connected, and uses the following command setting up the values accordingly:</p>
+    <pre><code>ega-qv -f -o seckey=$privkey_file "$username"@"$lega_ip" $local_dir</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+    <p>The mount point will stay connected until the execution is stopped (e.g. using Ctrl+C, killing the process or closing the terminal tab).</p>
+
+    <p>The easier way to use this is creating a new tab if the terminal is needed in the meanwhile, but a user could also use the same command without the “-f” flag to run EGA-QuickView in the background. The latter solution comes with the disadvantage that the user will have to manually umount the directory (e.g. using umount $local_dir) when the connection is no longer needed.</p>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 FEGA Italy – All rights reserved</p>
+  </footer>
+
+  <script>
+    function copyCode(button) {
+      const pre = button.parentElement;
+      const code = pre.querySelector('code');
+      const text = code.innerText || code.textContent;
+
+      if (!navigator.clipboard) {
+        // Fallback for browsers without Clipboard API support
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          button.innerText = 'Copied!';
+        } catch (err) {
+          alert('Copy failed');
+        }
+        document.body.removeChild(textarea);
+        setTimeout(() => button.innerText = 'Copy', 1500);
+        return;
+      }
+
+      navigator.clipboard.writeText(text).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => button.innerText = 'Copy', 1500);
+      }).catch(() => {
+        alert('Failed to copy');
+      });
+    }
+  </script>
+</body>
+</html>
+
