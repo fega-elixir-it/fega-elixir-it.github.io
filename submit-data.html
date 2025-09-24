@@ -44,7 +44,7 @@
 
     <h3>Step 1 – Register</h3>
     <ul>
-      <li>Register in the Central EGA Website.</li>
+      <li>Register in the Central EGA Website.<\br>you will need to set your USERNAME (a suitable email address) and your PASSWORD.</li>
       <li>Create an RSA or ED25519 key pair using the command:</li>
     </ul>
 
@@ -53,34 +53,36 @@
     <p>The generator will ask for a passphrase. Choose a secure one. You will obtain two files:</p>
     <ul>
       <li><code>fega.key</code> – your private key (keep it always secure)</li>
-      <li><code>fega.key.pub</code> – your public key (upload this file)</li>
+      <li><code>fega.key.pub</code> – your public key (upload this file to the EGA website)</li>
     </ul>
-    <p>Upload your public key in your user profile in the EGA Website (link soon).</p>
+    <p>Upload ONLY your public key in your user profile in the EGA Website (link soon).</p>
 
-    <h3>Step 2 – Data Submission</h3>
-    <p>To create the LEGA Node’s public key file:</p>
-
+    
+    <p>Take note of the LEGA Node’s public key file:</p>
     <pre><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG1WP8MsReW9BKix/q0zfejtbNTL7P/4M0VRghuN9KCn service_key@LocalEGA</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    <p>Copy and save it into a simple text file called lega.key.pub</p>p>
 
-    <p>Encrypt the file(s) using:</p>
+	<h3>Step 2 – Data Submission</h3>
+	  
+	<p>Encrypt the file(s) using:</p>
 
-    <pre><code>crypt4gh encrypt --recipient_pk $lega_pubkey_file &lt; $filename &gt; $filename.c4gh</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    <pre><code>crypt4gh encrypt --recipient_pk lega.key.pub  &lt; filename.ext &gt; filename.ext.c4gh</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
 
     <p>Connect to the LEGA SFTP inbox using:</p>
 
-    <pre><code>sftp -o User=$username -P 2222 -i $privkey_file $lega_ip</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    <pre><code>sftp -o User=&lt;USERNAME&gt; -p 2222 -i &lt;path/to/fega.key&gt; 193.205.32.66</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
 
     <p>Upload the encrypted file:</p>
 
-    <pre><code>sftp&gt; put GCF_009914755.1_T2T-CHM13v2.0_genomic.fna.c4gh</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    <pre><code>sftp&gt; put filename.ext.c4gh</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
 
     <p>Example output:</p>
 
     <pre><code>Connected to 146.193.228.54.
-sftp&gt; put GCF_009914755.1_T2T-CHM13v2.0_genomic.fna.c4gh
+sftp&gt; put filename.ext.c4gh
 Uploading... 100% 3011MB   5.5MB/s   09:06</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
 
-    <p>You can delete unprocessed files using <code>rm &lt;filename&gt;</code>. Files already in staging/vault cannot be removed.</p>
+    <p>You can delete unprocessed files using <code>rm &lt;filename&gt;</code>. NOTE: Files already in staging/vault cannot be removed.</p>
 
     <h3>Step 3 – Metadata Submission</h3>
     <ul>
