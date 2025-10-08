@@ -3,95 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FEGA Italy – Node Team</title>
+  <title>Team – FEGA Italy</title>
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    /* ===== GLOBAL RESET ===== */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #333;
-      background-color: #fff;
-      line-height: 1.5;
-    }
-
-    /* ===== HEADER ===== */
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      border-bottom: 2px solid #e0e0e0;
-      background-color: #fafafa;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: #003366;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #0077cc;
-      font-weight: bold;
-      transition: color 0.2s;
-    }
-
-    nav a:hover {
-      color: #005599;
-    }
-
-    .header-logos {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .header-logos img {
-      height: 60px;
-      width: auto;
-    }
-
     /* ===== TEAM SECTION ===== */
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    h2 {
-      text-align: center;
-      color: #003366;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
     .team-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
+      padding: 2rem 0;
     }
 
     .member {
@@ -141,20 +62,7 @@
       text-decoration: none;
     }
 
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      margin-top: 2rem;
-      padding: 1rem 0;
-      background-color: #f0f0f0;
-      font-size: 0.9rem;
-    }
-
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.6rem;
-      }
       .member {
         max-width: 160px;
       }
@@ -175,94 +83,75 @@
         <li><a href="./search-data.html">Search data</a></li>
         <li><a href="./access-data.html">Access data</a></li>
         <li><a href="./approve-access.html">Approve access</a></li>
-        <li><a href="./node-status.html">Node status</a></li>
+        <li><a href="https://status.test.ega-archive.org/status/fega-italy">Node status</a></li>
         <li><a href="./technical-overview.html">Technical Overview</a></li>
         <li><a href="./fega-team.html">Team</a></li>
       </ul>
     </nav>
     <div class="header-logos">
-      <img src="./imgs/elixir_logo.png" alt="Elixir Italy Logo" />
+      <img src="./imgs/elixir_logo.png" alt="Elixir Italia Logo" />
       <img src="./imgs/fega2.png" alt="FEGA Logo" />
     </div>
   </header>
 
   <main>
-    <h2>Italian Node Team</h2>
-    <p>The team behind the Italian FEGA node consists of professionals in genomics, data security, and bioinformatics infrastructure.</p>
+    <h2 style="text-align:center;">Italian Node Team</h2>
+    <p style="text-align:center;">The team behind the Italian FEGA node consists of professionals in genomics, data security, and bioinformatics infrastructure.</p>
 
     <div class="team-container">
-      <!-- Membri esistenti -->
+      <!-- Membri -->
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Claudio Lo Giudice" />
         <div class="member-name">Claudio Lo Giudice</div>
-        <div class="member-email">
-          <a href="mailto:clalogiudice@gmail.com">clalogiudice@gmail.com</a>
-        </div>
+        <div class="member-email"><a href="mailto:clalogiudice@gmail.com">clalogiudice@gmail.com</a></div>
       </div>
 
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Sharon Natasha Cox" />
         <div class="member-name">Sharon Natasha Cox</div>
-        <div class="member-email">
-          <a href="mailto:sharonnatasha.cox@gmail.com">sharonnatasha.cox@gmail.com</a>
-        </div>
+        <div class="member-email"><a href="mailto:sharonnatasha.cox@gmail.com">sharonnatasha.cox@gmail.com</a></div>
       </div>
 
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Nadina Foggetti" />
         <div class="member-name">Nadina Foggetti</div>
-        <div class="member-email">
-          <a href="mailto:nadina.foggetti@cnr.it">nadina.foggetti@cnr.it</a>
-        </div>
+        <div class="member-email"><a href="mailto:nadina.foggetti@cnr.it">nadina.foggetti@cnr.it</a></div>
       </div>
 
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Guido Cauli" />
         <div class="member-name">Guido Cauli</div>
-        <div class="member-email">
-          <a href="mailto:guido.cauli@gmail.com">guido.cauli@gmail.com</a>
-        </div>
+        <div class="member-email"><a href="mailto:guido.cauli@gmail.com">guido.cauli@gmail.com</a></div>
       </div>
 
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Angelo Sante Varvara" />
         <div class="member-name">Angelo Sante Varvara</div>
-        <div class="member-email">
-          <a href="mailto:angelovarvara94@gmail.com">angelovarvara94@gmail.com</a>
-        </div>
+        <div class="member-email"><a href="mailto:angelovarvara94@gmail.com">angelovarvara94@gmail.com</a></div>
       </div>
 
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Graziano Pesole" />
         <div class="member-name">Graziano Pesole</div>
-        <div class="member-email">
-          <a href="mailto:graziano.pesole@uniba.it">graziano.pesole@uniba.it</a>
-        </div>
+        <div class="member-email"><a href="mailto:graziano.pesole@uniba.it">graziano.pesole@uniba.it</a></div>
       </div>
 
-      <!-- Nuovi membri -->
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Giorgia Miniello" />
         <div class="member-name">Giorgia Miniello</div>
-        <div class="member-email">
-          <a href="mailto:giorgia.miniello@cnr.it">giorgia.miniello@cnr.it</a>
-        </div>
+        <div class="member-email"><a href="mailto:giorgia.miniello@cnr.it">giorgia.miniello@cnr.it</a></div>
       </div>
 
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Gianluca Cecinato" />
         <div class="member-name">Gianluca Cecinato</div>
-        <div class="member-email">
-          <a href="mailto:gianluca.cecinato@cnr.it">gianluca.cecinato@cnr.it</a>
-        </div>
+        <div class="member-email"><a href="mailto:gianluca.cecinato@cnr.it">gianluca.cecinato@cnr.it</a></div>
       </div>
 
       <div class="member">
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Vitoflavio Licciulli" />
         <div class="member-name">Vitoflavio Licciulli</div>
-        <div class="member-email">
-          <a href="mailto:vitoflavio.licciulli@cnr.it">vitoflavio.licciulli@cnr.it</a>
-        </div>
+        <div class="member-email"><a href="mailto:vitoflavio.licciulli@cnr.it">vitoflavio.licciulli@cnr.it</a></div>
       </div>
     </div>
   </main>
