@@ -16,9 +16,16 @@
     }
 
     .member {
-      flex: 1 1 150px;
-      max-width: 180px;
+      flex: 1 1 180px;
+      max-width: 200px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
     }
 
     .member img {
@@ -30,29 +37,31 @@
     }
 
     .member-name {
-      margin-top: 0.5rem;
       font-weight: bold;
-      word-wrap: break-word;
     }
 
     .member-email {
       font-size: 0.9em;
       color: #555;
-      word-break: break-all;
+      max-width: 100%;
+      word-break: break-word;
+      line-height: 1.2;
+      text-align: center;
+      overflow-wrap: anywhere;
     }
 
-    .team-container a {
+    .member-email a {
       color: inherit;
       text-decoration: none;
     }
 
     @media (max-width: 600px) {
+      .member {
+        max-width: 160px;
+      }
       .member img {
         width: 90px;
         height: 90px;
-      }
-      .member {
-        max-width: 140px;
       }
     }
 
