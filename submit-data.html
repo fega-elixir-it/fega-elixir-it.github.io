@@ -62,12 +62,12 @@
     <h3>Step 1 – Register</h3>
     <ul>
       <li>Register in the Central EGA Website.<br/>you will need to set your USERNAME (a suitable email address) and your PASSWORD.</li>
-      <li>Create an RSA or ED25519 key pair using the command:</li>
+      <li>Create a ED25519 public/private key pair using the command:</li>
     </ul>
 
     <pre><code>ssh-keygen -t ed25519 -f fega.key</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
 
-    <p>The generator will ask for a passphrase. Choose a secure one. You will obtain two files:</p>
+    <p>The generator will ask for a passphrase: <u>note that if you choose to enter one, you'll have to remember and/or annotate that passphrase as it will be required at every use of the private key</u>. You will obtain two files:</p>
     <ul>
       <li><code>fega.key</code> – your private key (keep it always secure)</li>
       <li><code>fega.key.pub</code> – your public key (upload this file to the EGA website)</li>
