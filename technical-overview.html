@@ -75,9 +75,9 @@
         <h4>Data Submission</h4>
         <p>Before submission, data must be encrypted using the LEGA public key in Crypt4GH format:</p>
         <pre><code>ssh-ed25519 AAAAC3Nza... Service.Key@LocalEGA</code></pre>
-        <pre><code>crypt4gh encrypt --recipient_pk $lega_pubkey_file < $filename > $filename.c4gh</code></pre>
+        <pre><code>crypt4gh encrypt --recipient_pk <i>path/to/lega_pubkey_file</i> < <i>filename</i> > <i>encrypted_filename.c4gh</i></code></pre>
         <p>Once encrypted, data can be uploaded to the LEGA inbox via SFTP:</p>
-        <pre><code>sftp -o User=$username -P 2222 -i $privkey_file $lega_ip</code></pre>
+        <pre><code>sftp -o User=<i>username</i> -P 2222 -i <i>path/to/privkey_file</i> lega_IP_ADDRESS</code></pre>
         <p><a href="#top">Back to Top</a></p>
       </section>
 
