@@ -48,7 +48,7 @@
 
     <h3>Method 1: SSH File Transfer Protocol</h3>
     <p>The most immediate way to download files from a LEGA node is by accessing its distribution endpoint using SFTP:</p>
-    <pre><code>sftp -o User=$username -P 2222 -i $privkey_file $lega_ip</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    <pre><code>sftp -o User=<i>username</i> -P 2222 -i <i>path/to/privkey_file</i> lega_IP_ADDRESS</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
 
     <p>Download it using:</p>
     <pre><code>get &lt;filename&gt;</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
